@@ -20,7 +20,7 @@ class VentaModel extends Mysql
 
         // --- PASO 1: VALIDACIÓN DE EXISTENCIA ---
         // Antes de intentar cualquier inserción, validamos cada venta que se va a crear.
-        foreach ($ventas as $docArray) {
+        /*foreach ($ventas as $docArray) {
             // Extraemos los datos clave del array preparado
             $mes_id = $docArray[0];
             $mes = $docArray[1];
@@ -41,7 +41,7 @@ class VentaModel extends Mysql
                 // El controlador lo capturará y marcará esta venta como fallida.
                 throw new Exception("La venta -- Mes: {$mes} | Estado: {$estado} | Sucursal: {$sucursal} | Region: {$region} | Tipo de cliente: {$tipo_cliente} | Sku: {$sku} ya existe en la base de datos.");
             }
-        }
+        }*/
 
         // --- PASO 3: PERSISTENCIA (Si todas las validaciones pasaron) ---
         $this->beginTransaction();
@@ -124,7 +124,7 @@ class VentaModel extends Mysql
             $valueStrings[] = "(" . implode(',', $sanitizedValues) . ")";
         }
 
-        $sql = "INSERT INTO PANEL_HOMOLOGACIONVTA_DELETE ($columnas) VALUES " . implode(", ", $valueStrings);
+        $sql = "REPLACE INTO PANEL_HOMOLOGACIONVTA_DELETE ($columnas) VALUES " . implode(", ", $valueStrings);
         $this->insert_massive($sql);
     }
 }
